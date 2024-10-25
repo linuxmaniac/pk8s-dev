@@ -1,0 +1,31 @@
+kind: Cluster
+name: pk8s-dev
+talos:
+  version: v1.8.1
+kubernetes:
+  version: 1.31.2
+features:
+  enableWorkloadProxy: true
+patches:
+  - name: cni
+    file: patches/cni.yaml
+labels:
+  env: dev
+---
+kind: ControlPlane
+machineClass:
+  name: omni-pk8s-dev-controlplane
+  size: 3
+patches:
+  - name: cilium
+    file: patches/cilium.yaml
+  - name: argocd
+    file: patches/argocd.yaml
+  - name: monitoring
+    file: patches/monitoring.yaml
+---
+kind: Workers
+name: workers
+machineClass:
+  name: omni-pk8s-dev-workers
+  size: unlimited
