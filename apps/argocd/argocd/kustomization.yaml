@@ -8,6 +8,7 @@ resources:
   - bootstrap-app-set.yaml
 
 patches:
+  - path: repo-server-ksops.yaml
   - path: config.yaml
   - path: params.yaml
   - path: service.yaml

@@ -20735,6 +20735,7 @@ cluster:
         apiVersion: v1
         data:
           application.resourceTrackingMethod: annotation
+          kustomize.buildOptions: --enable-alpha-plugins --enable-exec
         kind: ConfigMap
         metadata:
           labels:
@@ -21488,6 +21489,10 @@ cluster:
               - args:
                 - /usr/local/bin/argocd-repo-server
                 env:
+                - name: XDG_CONFIG_HOME
+                  value: /.config
+                - name: SOPS_AGE_KEY_FILE
+                  value: /.config/sops/age/age.agekey
                 - name: ARGOCD_RECONCILIATION_TIMEOUT
                   valueFrom:
                     configMapKeyRef:
@@ -21668,6 +21673,14 @@ cluster:
                   seccompProfile:
                     type: RuntimeDefault
                 volumeMounts:
+                - mountPath: /usr/local/bin/kustomize
+                  name: custom-tools
+                  subPath: kustomize
+                - mountPath: /usr/local/bin/ksops
+                  name: custom-tools
+                  subPath: ksops
+                - mountPath: /.config/sops/age
+                  name: sops-age
                 - mountPath: /app/config/ssh
                   name: ssh-known-hosts
                 - mountPath: /app/config/tls
@@ -21685,6 +21698,17 @@ cluster:
                 - mountPath: /home/argocd/cmp-server/plugins
                   name: plugins
               initContainers:
+              - args:
+                - echo "Installing KSOPS..."; mv ksops /custom-tools/; mv kustomize /custom-tools/;
+                  echo "Done.";
+                command:
+                - /bin/sh
+                - -c
+                image: viaductoss/ksops:v4.3.2
+                name: install-ksops
+                volumeMounts:
+                - mountPath: /custom-tools
+                  name: custom-tools
               - command:
                 - /bin/cp
                 - -n
@@ -21706,6 +21730,11 @@ cluster:
                   name: var-files
               serviceAccountName: argocd-repo-server
               volumes:
+              - emptyDir: {}
+                name: custom-tools
+              - name: sops-age
+                secret:
+                  secretName: sops-age
               - configMap:
                   name: argocd-ssh-known-hosts-cm
                 name: ssh-known-hosts
