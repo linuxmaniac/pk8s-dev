@@ -1,0 +1,60 @@
+---
+csiDriver:
+  # should be globally unique for a given cluster
+  name: "org.democratic-csi.iscsi"
+
+# add note here about volume expansion requirements
+storageClasses:
+  - name: freenas-iscsi-csi
+    defaultClass: true
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      # for block-based storage can be ext3, ext4, xfs
+      fsType: ext4
+    mountOptions: []
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
+
+volumeSnapshotClasses:
+  - name: freenas-iscsi-csi
+    labels:
+      velero.io/csi-volumesnapshot-class: "true"
+    deletionPolicy: Delete
+    parameters:
+      detachedSnapshots: "true"
+    secrets:
+      snapshotter-secret:
+
+driver:
+  existingConfigSecret: freenas-api-iscsi-driver-config
+  config:
+    driver: freenas-api-iscsi
+# talos config
+# https://github.com/democratic-csi/democratic-csi#talos
+controller:
+  rbac:
+    enabled: true
+  enabled: true
+  driver:
+    logLevel: debug
+
+node:
+  rbac:
+    enabled: true
+  enabled: true
+  hostPID: true
+  driver:
+    logLevel: debug
+    extraEnv:
+      - name: ISCSIADM_HOST_STRATEGY
+        value: nsenter
+      - name: ISCSIADM_HOST_PATH
+        value: /usr/local/sbin/iscsiadm
+    iscsiDirHostPath: /usr/local/etc/iscsi
+    iscsiDirHostPathType: ""

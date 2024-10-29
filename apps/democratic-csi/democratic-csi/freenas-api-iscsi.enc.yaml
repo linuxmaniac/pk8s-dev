@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+    name: freenas-api-iscsi-driver-config
+    namespace: democratic-csi
+    labels: null
+stringData:
+    driver-config-file.yaml: ENC[AES256_GCM,data:KoypTSOIbWTyxk7T2kf5jJ8dkBM/hzHgmjFDwVFw0wSLgjQPf3G3MGZzUxox4r2wuO9u/hNQ9TQo+tiYiN8hlyqwlS4X6a2LoH4XFjBDGLHOx86akSeMAL7hiGJxOk7GotlKURKw/yHqRTkYYLQIs4FckU42JaAXOdDX9qjtd598LEFbNSor6fNuy7piKFDxYV1l3kdDQK7onrJpxT6Xv078CiQlMdx4TzCnWLCtcxlqc7ziaUQMKy+H/Gn7Tdc4As+A0djYYLzVYA1aG8Prc0+ec1ad6uRu6yOLsA1tXm6llA8i1hruflHq22U2FNp26vJhWAatQbNcqu8zeEhA5WmNMLUCDR8DbuKP9cnNdQGJ3U+pIH6M5cRmulSz9N4xCu5oBS0W442Jx+5l6+kHs2l4vuayASOIDuRAPvY+p8+1S8uROPsFZiAf0uBjxx23WGpiLRc5BLMmk3ynN0MUBm1ywg0M1FCWa40E4YnOrwQ2sL2AV1bFQdbpf+nI4YLYY72807n4kvI8oNU9OOiSQ3byH/hXHHRau07auxLAZefciZtwhX1qR2KRlTU8mnO7Eix71NJBmoztbkmhc7yc69R4F2jd+VgeCVvkNimh0BakNa7Agk2IirgyDfbLQ9vk3JGQcBxkpv4yDcb7LxISGSv0yHB6UcPEJ8QKnaqwFZRmAErTUOgQd1B4f77PwQOxvdqWzCpxOw8xai1Ch73X8bJuTPtB8RxiibP+CUnFMFiW3A9PT2w/u80sxgezxhzxc/EVdamjxFLjfNEUDOnQu1J5lItGPsQpWSCgEuWHsE6I+LHnyPTRGhmHzMmLqTQMar+b/L8yt7ErR2pKBKspRAu3ngO6/kQrC7C/VTKvizXxlzH6BdX+sF6304bPW+nGH1BGtwPfgPbF4Ip37w8gZVHF8BkPE7W8VLsIgcWKWjLdcgh3jSv/ocv6qA2ccwXVMEgMGSpbmHNZ4XanLpa9Hi89yn0VvV6BEZFmHwgtUQvWcFSXeR+YLKxBkN4VAk4dmi1nn3rsJMViHn10DbmLQrh91Zd2B3/azZNjBBbXOQf43vYu0PgQyWqK8/siFi7j6POvinpJlNbBHBpDAFRfOAwqha7DQJYFK8nJ32hXU4GX/JL1G3R7gu4sX1bxgN82G1oxfZtyuf46nIXFCIj9xk7ZLdkSkS2wRJdj8YD4jBB9pFW1WVSu+Q==,iv:+6G/Zpx7tBF4XZKoHpl/MCdAsFuBtmzOk1txX4/2q+U=,tag:iHLKXEtLLNbUIukyCq8ZfA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1lpqp7ue6rj8x020uvlrklk2pz6k6va80qh3c7fzce0v7gq2m3akssrfmkr
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0SEZacVd4ZkgzWENHNjJR
+            WHE5Z0h4QWUydXc3c1o3THl1Y0YxNitGR0hNClUwdzZUTit1UDhqOW1GcVhiNGVx
+            Rk4zVEhRTW1UNXc4RngzWHJlSmFnWDgKLS0tIGhVOTRadnlUSnQyWE5UNzJUb0U4
+            eWxCbnFvdEhmTkdTYXYyeTk4MTdIcVUKAXsXW7Hf+tD5J7lKEUS/hQD7izq9r0AO
+            dDMOIh8GOXn91KSrbe9DBNViufNm/Be+gdDwm6dkcfyJGF85++iZzQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-10-30T18:27:47Z"
+    mac: ENC[AES256_GCM,data:kxS05c4uV9a9EmdTLBC6m2ZKvePtuRe/djGHcWCb29rv7PI0Zp1/bB2fu16XiKUQ+GP2D8K6VtGoWfyWKlvJ3w+m3PUR0KvLXclfwmMGXINiENLNWSVARzhmmNbuyc1bbedxbieG50J4gqOMHufXlcbYL39/5TOVg6hyRSPBSKw=,iv:emeklU6hXPV5sHSZtwG7PmZ+U+xdsYKk6vzIsNX//7Y=,tag:9FvxdN1CfbHzV1zpKxN9Jg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.1
